@@ -15,16 +15,16 @@ namespace ChromiumWebBrowser.Features.Downloader
         {
             return new PackageConfig
             {
-                Name = "cefsharp_73.1.13_x64",
+                Name = "cefsharp_75.1.14_x64",
                 Nugets = new List<NugetInfo>
                 {
-                    new NugetInfo("CefSharp.Common", "73.1.130",
+                    new NugetInfo("CefSharp.Common", "75.1.142",
                         new List<CopyInfo> {new CopyInfo("/CefSharp/x64", "/")}),
 
-                    new NugetInfo("CefSharp.WinForms", "73.1.130",
+                    new NugetInfo("CefSharp.WinForms", "75.1.142",
                         new List<CopyInfo> {new CopyInfo("/CefSharp/x64", "/")}),
 
-                    new NugetInfo("cef.redist.x64", "73.1.13",
+                    new NugetInfo("cef.redist.x64", "75.1.14",
                         new List<CopyInfo>
                         {
                             new CopyInfo("/CEF", "/"),

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ChromiumWebBrowser.Features.Chromium.Controls;
 
 namespace ChromiumWebBrowser
 {
@@ -15,6 +16,15 @@ namespace ChromiumWebBrowser
         public Form1()
         {
             InitializeComponent();
+
+            Browser = new AdvanceChromiumWebBrowser("www.google.com")
+            {
+                Dock = DockStyle.Fill
+            };
+
+            tabPage1.Controls.Add(Browser);
         }
+
+        public AdvanceChromiumWebBrowser Browser { get; set; }
     }
 }

@@ -20,9 +20,8 @@ namespace ChromiumWebBrowser.Core.Misc.Bootstrap
         private const string _DEV_FILE = "dev.json";
         private const string _CONFIG_DIR = "config";
         private const string _DROP_BOX_DIR = "Dropbox";
-        private const string _ANTI_PIRACY_GLOBAL_DIR = "AntiPiracy";
-        private const string _ANTI_PIRACY_GLOBAL_MAIN_DIR = "main";
-        private const string _ANTI_PIRACY_GLOBAL_DB_DIR = "db";
+        private const string _DENEB_LAB_GLOBAL_DIR = "DenebLab";
+        private const string _DENEB_LAB_GLOBAL_MAIN_DIR = "main";
         private static readonly AppEnvironmentBuilder _instance = new AppEnvironmentBuilder();
 
         private static AppEnvironment _appEnvironmentValue;
@@ -112,6 +111,7 @@ namespace ChromiumWebBrowser.Core.Misc.Bootstrap
             Helpers.CreateDirIfNotExist(res.MiscDir);
             Helpers.CreateDirIfNotExist(res.OrganizationGlobalDir);
             Helpers.CreateDirIfNotExist(res.OrganizationMainDir);
+            Helpers.CreateDirIfNotExist(res.CefBinariesDir);
             
 
             return res;
@@ -119,7 +119,9 @@ namespace ChromiumWebBrowser.Core.Misc.Bootstrap
 
         private string GetCefBinariesDir(bool resIsDeveloperMode, AppEnvironment res)
         {
-            return res.OrganizationGlobalDir;
+            var appDataLocalDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var path = Path.Combine(appDataLocalDir, "CEF", "Binaries");
+            return path;
         }
 
         private static string GetGlobalDir(string rootDir)
@@ -133,13 +135,13 @@ namespace ChromiumWebBrowser.Core.Misc.Bootstrap
         private static string GetOrganizationGlobalDir()
         {
             var appDataLocalDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            var antiPiracyGlobalDir = Path.Combine(appDataLocalDir, _ANTI_PIRACY_GLOBAL_DIR);
+            var antiPiracyGlobalDir = Path.Combine(appDataLocalDir, _DENEB_LAB_GLOBAL_DIR);
             return antiPiracyGlobalDir;
         }
 
         private static string GetOrganizationMainDir(string organizationGlobalDir)
         {
-            var organizationMainDir = Path.Combine(organizationGlobalDir, _ANTI_PIRACY_GLOBAL_MAIN_DIR);
+            var organizationMainDir = Path.Combine(organizationGlobalDir, _DENEB_LAB_GLOBAL_MAIN_DIR);
             return organizationMainDir;
         }
 

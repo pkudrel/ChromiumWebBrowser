@@ -31,14 +31,14 @@ namespace ChromiumWebBrowser
             {
                 var env = MainPart1();
                 var reg = MainPart2(env);
+                MainConfigureCef(env, reg);
             }
             catch (Exception e)
             {
                 _log.Error(e);
             }
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            
             Application.Run(new Form1());
         }
 

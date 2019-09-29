@@ -70,6 +70,10 @@
     <Compile Include="Common\Io\FileAsync.cs" />
     <Compile Include="Common\Io\Misc.cs" />
     <Compile Include="Common\Io\QueryString.cs" />
+    <Compile Include="Features\Chromium\Models\Cookie.cs" />
+    <Compile Include="Features\Chromium\Models\FrameSimple.cs" />
+    <Compile Include="Features\Chromium\Models\SelectorState.cs" />
+    <Compile Include="Features\Chromium\Models\WaitForSelector.cs" />
     <Compile Include="Misc\Bootstrap\AppEnvironment.cs" />
     <Compile Include="Misc\Bootstrap\AppEnvironmentBuilder.cs" />
     <Compile Include="Misc\Bootstrap\AppVersion.cs" />
@@ -91,5 +95,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

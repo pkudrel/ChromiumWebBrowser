@@ -8,9 +8,9 @@
     <owners>DenebLab</owners>
     <licenseUrl>https://github.com/pkudrel/ChromiumWebBrowser/blob/production/LICENSE</licenseUrl>
     <projectUrl>https://github.com/pkudrel/ChromiumWebBrowser</projectUrl>
-    <iconUrl>http://antypirat.info/wp-content/uploads/2015/05/APP-PL-logo-new.png</iconUrl>
+    <iconUrl>https://github.com/pkudrel/ChromiumWebBrowser/blob/production/others/gfx/chromium-icon.ico</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>LukeSearch</description>
-    <tags>Anti Piracy</tags>
+  
   </metadata>
 </package>

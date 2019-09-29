@@ -215,8 +215,8 @@ class Build : NukeBuild
             }
 
 
-            var nlog = srcBuild / "nlog" / "main";
-            CopyDirectoryRecursively(nlog, readOut, DirectoryExistsPolicy.Merge);
+            //var nlog = srcBuild / "nlog" / "main";
+            //CopyDirectoryRecursively(nlog, readOut, DirectoryExistsPolicy.Merge);
 
         });
 

@@ -5,9 +5,9 @@
     <id>LukeSearch</id>
     <version>{Version}</version>
     <authors>Piotr Kudrel</authors>
-    <owners>Anti-Piracy Protection</owners>
-    <licenseUrl>http://antypirat.info/</licenseUrl>
-    <projectUrl>http://antypirat.info/</projectUrl>
+    <owners>DenebLab</owners>
+    <licenseUrl>https://github.com/pkudrel/ChromiumWebBrowser/blob/production/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/pkudrel/ChromiumWebBrowser</projectUrl>
     <iconUrl>http://antypirat.info/wp-content/uploads/2015/05/APP-PL-logo-new.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>LukeSearch</description>

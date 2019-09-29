@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using AbcVersionTool;
 using Helpers;
-using Helpers.Azure;
 using Helpers.Syrup;
 using Models;
 using Nuke.Common;
@@ -28,7 +27,7 @@ class Build : NukeBuild
 
     [GitRepository] readonly GitRepository GitRepository;
 
-    [Solution("src/LukeSearch.sln")] readonly Solution Solution;
+    [Solution("src\\ChromiumWebBrowser.sln")] readonly Solution Solution;
 
     bool IsTeamCity = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TEAMCITY_VERSION")) == false;
     readonly bool IsAzureDevOps = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("AGENT_NAME")) == false;
@@ -43,7 +42,7 @@ class Build : NukeBuild
     AbsolutePath LibzPath => ToolsDir / "LibZ.Tool" / "tools" / "libz.exe";
     AbsolutePath NugetPath => ToolsDir / "nuget.exe";
     AbsolutePath SourceDir => RootDirectory / "src";
-    Project LukeSearchProject => Solution.GetProject("ChromiumWebBrowser").NotNull();
+    Project ChromiumWebBrowserProject => Solution.GetProject("ChromiumWebBrowser").NotNull();
   
 
     ProductInfo ProductInfo => new ProductInfo
@@ -62,7 +61,7 @@ class Build : NukeBuild
             Exe = "ChromiumWebBrowser.exe",
             DstExe = "ChromiumWebBrowser.exe",
             AzureContainerName = "application-chromium-webbrowser",
-            Project = LukeSearchProject
+            Project = ChromiumWebBrowserProject
         },
       
     };
@@ -269,58 +268,11 @@ class Build : NukeBuild
 
 
     Target Publish => _ => _
-        .DependsOn(Nuget, PublishLocal, PublishTeamCity, PublishAzureDevOps);
+        .DependsOn(Nuget, PublishLocal);
 
-    Target PublishAzureDevOps => _ => _
-        .DependsOn(PublishAzureDevOpsArtifacts, PublishAzureDevOpsStorage);
 
-    Target PublishAzureDevOpsArtifacts => _ => _
-         .DependsOn(Nuget)
-         .OnlyWhenStatic(() => IsAzureDevOps)
-         .Executes(() =>
-         {
-             var p = Projects.FirstOrDefault(x => x.Project == LukeSearchProject);
-             if (p == null)
-                 throw new KeyNotFoundException($"Project: '{LukeSearchProject}' not found in projects list");
-             var tmpReady = TmpBuild / CommonDir.Nuget ;
-             EnsureExistingDirectory(tmpReady);
-             Logger.Info($"Path: `{tmpReady}`");
-             var globFiles = GlobFiles(tmpReady, "*.zip");
-             Logger.Info($"Artifact files: {globFiles.Count}");
-             globFiles.ForEach(x => Logger.Info($"{x}"));
-             var serverPublishArtifact = Environment.GetEnvironmentVariable("BUILD_ARTIFACTSTAGINGDIRECTORY");
-             CopyDirectoryRecursively(tmpReady, serverPublishArtifact, DirectoryExistsPolicy.Merge);
-         });
 
-    Target PublishAzureDevOpsStorage => _ => _
-        .DependsOn(PublishAzureDevOpsArtifacts)
-        .OnlyWhenStatic(() => IsAzureDevOps)
-        .Executes(async () =>
-        {
-            void LogFiles(string title, List<ReleaseInfo> filesToShow)
-            {
-                Logger.Info($"{title}: {filesToShow.Count}");
-                foreach (var l in filesToShow) Logger.Info($"Name: {l.Name}; Date: {l.ReleaseDate}");
-            }
 
-            var p = Projects.FirstOrDefault(x => x.Project == LukeSearchProject);
-            if (p == null)
-                throw new KeyNotFoundException($"Project: '{LukeSearchProject}' not found in projects list");
-
-            var storageConnectionString = Environment.GetEnvironmentVariable("azureStorageConnectionStringKey1");
-            Logger.Info($"Build; storageConnectionString: {storageConnectionString}");
-            var serverPublishArtifact = Environment.GetEnvironmentVariable("BUILD_ARTIFACTSTAGINGDIRECTORY");
-            var files = Directory.GetFiles(serverPublishArtifact).ToList();
-            var client = AzureSyrupTools.Create(storageConnectionString, p.AzureContainerName);
-            await client.UploadFiles(files);
-            var list = await client.GetSyrupFiles();
-            var fileToRemove = list.OrderByDescending(x => x.ReleaseDate).Skip(15).ToList();
-            LogFiles("Files to remove", fileToRemove);
-            await client.RemoveSyrupFiles(fileToRemove);
-            var newList = await client.GetSyrupFiles();
-            await client.CreateSyrupFilesList(newList);
-            LogFiles("Files in container", newList);
-        });
 
 
     Target PublishLocal => _ => _
@@ -329,19 +281,7 @@ class Build : NukeBuild
         {
         });
 
-    Target PublishTeamCity => _ => _
-        .DependsOn(Nuget)
-        .OnlyWhenStatic(() => IsTeamCity)
-        .Executes(() =>
-        {
 
-
-            var serverPublishDir = @"C:\work\users\AntyPiracy\LukeSearch\syrup";
-            var nugetDir = TmpBuild / "nuget";
-
-            EnsureExistingDirectory(serverPublishDir);
-            CopyDirectoryRecursively(nugetDir, serverPublishDir, DirectoryExistsPolicy.Merge);
-        });
 
     public static int Main() => Execute<Build>(x => x.Publish);
 }

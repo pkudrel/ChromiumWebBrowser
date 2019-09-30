@@ -1,15 +1,17 @@
 name: CI
 
-on: [push]
+on:
+  push:
+    branches:
+    - master
 
 jobs:
   build:
 
-    runs-on: windows-latest
-    
-  steps:
+    runs-on: windows-2019
+
+    steps:
     - uses: actions/checkout@v1
     - name: Run a one-line script
-      run: .\build.ps1
+      run: .build.ps1
       shell: powershell
-

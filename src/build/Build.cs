@@ -13,7 +13,6 @@ using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling;
 using Nuke.Common.Tools.MSBuild;
-using Nuke.Common.Utilities.Collections;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.IO.PathConstruction;
 using static Nuke.Common.Tools.MSBuild.MSBuildTasks;
@@ -26,11 +25,11 @@ class Build : NukeBuild
     readonly DateTime BuildDate = DateTime.UtcNow;
 
     [GitRepository] readonly GitRepository GitRepository;
+    readonly bool IsAzureDevOps = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("AGENT_NAME")) == false;
 
     [Solution("src\\ChromiumWebBrowser.sln")] readonly Solution Solution;
 
     bool IsTeamCity = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TEAMCITY_VERSION")) == false;
-    readonly bool IsAzureDevOps = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("AGENT_NAME")) == false;
 
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
     string Configuration => IsTeamCity ? "Release" : "Debug";
@@ -43,7 +42,7 @@ class Build : NukeBuild
     AbsolutePath NugetPath => ToolsDir / "nuget.exe";
     AbsolutePath SourceDir => RootDirectory / "src";
     Project ChromiumWebBrowserProject => Solution.GetProject("ChromiumWebBrowser").NotNull();
-  
+
 
     ProductInfo ProductInfo => new ProductInfo
     {
@@ -62,8 +61,7 @@ class Build : NukeBuild
             DstExe = "ChromiumWebBrowser.exe",
             AzureContainerName = "application-chromium-webbrowser",
             Project = ChromiumWebBrowserProject
-        },
-      
+        }
     };
 
     AbcVersion Version => AbcVersionFactory.Create(BuildCounter, BuildDate);
@@ -92,9 +90,6 @@ class Build : NukeBuild
 
     Target Configure => _ => _
         .DependsOn(ConfigureAzureDevOps);
-
-
-
 
 
     Target CheckTools => _ => _
@@ -164,7 +159,6 @@ class Build : NukeBuild
                 finally
                 {
                     AssemblyTools.RollbackOriginalFiles(projectDir);
-
                 }
             }
         });
@@ -217,7 +211,6 @@ class Build : NukeBuild
 
             //var nlog = srcBuild / "nlog" / "main";
             //CopyDirectoryRecursively(nlog, readOut, DirectoryExistsPolicy.Merge);
-
         });
 
     Target Nuget => _ => _
@@ -266,13 +259,8 @@ class Build : NukeBuild
         });
 
 
-
     Target Publish => _ => _
         .DependsOn(Nuget, PublishLocal);
-
-
-
-
 
 
     Target PublishLocal => _ => _
@@ -280,7 +268,6 @@ class Build : NukeBuild
         .Executes(() =>
         {
         });
-
 
 
     public static int Main() => Execute<Build>(x => x.Publish);

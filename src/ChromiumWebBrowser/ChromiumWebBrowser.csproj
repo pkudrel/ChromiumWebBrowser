@@ -102,6 +102,17 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Features\Chromium\Controls\CookieConverter.cs" />
+    <Compile Include="Features\Chromium\Others\Class1.cs" />
+    <Compile Include="Features\Chromium\Handlers\DisplayHandler.cs" />
+    <Compile Include="Features\Chromium\Others\StreamResponseFilter.cs" />
+    <Compile Include="Features\Chromium\Others\ExperimentalStreamResponseFilter.cs" />
+    <Compile Include="Features\Chromium\Others\FindReplaceResponseFilter2.cs" />
+    <Compile Include="Features\Chromium\Handlers\LifeSpanHandler.cs" />
+    <Compile Include="Features\Chromium\Others\FindReplaceResponseFilter.cs" />
+    <Compile Include="Features\Chromium\Others\ExampleResourceRequestHandler.cs" />
+    <Compile Include="Features\Chromium\Others\CefSharpSchemeHandlerFactory.cs" />
+    <Compile Include="Features\Chromium\Others\CefSharpSchemeHandler.cs" />
+    <Compile Include="Features\Chromium\Others\ExampleRequestHandler.cs" />
     <Compile Include="Features\Downloader\ConfigBuilder.cs" />
     <Compile Include="Features\Downloader\Helpers\CopyTools.cs" />
     <Compile Include="Features\Downloader\Helpers\DownloadTool.cs" />
@@ -171,6 +182,7 @@
   <ItemGroup>
     <Content Include="chromium-icon.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

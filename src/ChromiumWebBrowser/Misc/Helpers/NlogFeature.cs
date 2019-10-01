@@ -80,7 +80,6 @@ namespace ChromiumWebBrowser.Misc.Helpers
                 $"Application version; Sem: {sem}; Full: {full} ; " +
                 $"Up time: {GetUpTime()} ; " +
                 $"Is64Bit: {isX64}");
-            var aa = 1;
         }
 
         public static TimeSpan GetUpTime()

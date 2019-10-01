@@ -104,6 +104,8 @@
     <Compile Include="Features\Chromium\Controls\CookieConverter.cs" />
     <Compile Include="Features\Chromium\Others\Class1.cs" />
     <Compile Include="Features\Chromium\Handlers\DisplayHandler.cs" />
+    <Compile Include="Features\Chromium\Others\ResourceHandlerExample1.cs" />
+    <Compile Include="Features\Chromium\Others\FlashResourceHandler.cs" />
     <Compile Include="Features\Chromium\Others\StreamResponseFilter.cs" />
     <Compile Include="Features\Chromium\Others\ExperimentalStreamResponseFilter.cs" />
     <Compile Include="Features\Chromium\Others\FindReplaceResponseFilter2.cs" />
@@ -113,6 +115,9 @@
     <Compile Include="Features\Chromium\Others\CefSharpSchemeHandlerFactory.cs" />
     <Compile Include="Features\Chromium\Others\CefSharpSchemeHandler.cs" />
     <Compile Include="Features\Chromium\Others\ExampleRequestHandler.cs" />
+    <Compile Include="Features\Chromium\ResourceHandlerTest\TestResourceHandler.cs" />
+    <Compile Include="Features\Chromium\ResourceHandlerTest\TestResourceRequestHandler.cs" />
+    <Compile Include="Features\Chromium\ResourceHandlerTest\TestResourceRequestHandlerFactory.cs" />
     <Compile Include="Features\Downloader\ConfigBuilder.cs" />
     <Compile Include="Features\Downloader\Helpers\CopyTools.cs" />
     <Compile Include="Features\Downloader\Helpers\DownloadTool.cs" />

@@ -111,7 +111,7 @@ namespace ChromiumWebBrowser.Features.Chromium.Others
             _log.Debug($"Type: {request.ResourceType}; Url: {request.Url}");
             if (request.ResourceType == ResourceType.Image) return null;
             if (request.ResourceType == ResourceType.Script) return null;
-            if (request.ResourceType == ResourceType.MainFrame) return new ExampleResourceRequestHandler(); ;
+          //  if (request.ResourceType == ResourceType.MainFrame) return new ExampleResourceRequestHandler(); ;
            
             
             return null;

@@ -7,6 +7,7 @@ using CefSharp;
 using ChromiumWebBrowser.Features.Chromium.Controls;
 using ChromiumWebBrowser.Features.Chromium.Handlers;
 using ChromiumWebBrowser.Features.Chromium.Others;
+using ChromiumWebBrowser.Features.Chromium.ResourceHandlerTest;
 
 namespace ChromiumWebBrowser
 {
@@ -16,7 +17,8 @@ namespace ChromiumWebBrowser
         {
             InitializeComponent();
 
-            Browser = new AdvanceChromiumWebBrowser("www.google.com")
+            // Browser = new AdvanceChromiumWebBrowser("www.google.com")
+            Browser = new AdvanceChromiumWebBrowser("http://test.hornetpk.lan/")
             {
                 Dock = DockStyle.Fill
             };
@@ -24,7 +26,7 @@ namespace ChromiumWebBrowser
 
             Browser.RequestHandler = new ExampleRequestHandler();
             Browser.LifeSpanHandler = new LifeSpanHandler();
-
+            Browser.ResourceRequestHandlerFactory  = new TestResourceRequestHandlerFactory();
             splitContainer1.Panel2.Controls.Add(Browser);
         }
 

@@ -5,9 +5,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CefSharp;
 using ChromiumWebBrowser.Features.Chromium.Controls;
-using ChromiumWebBrowser.Features.Chromium.Handlers;
-using ChromiumWebBrowser.Features.Chromium.Others;
-using ChromiumWebBrowser.Features.Chromium.ResourceHandlerTest;
 
 namespace ChromiumWebBrowser.Features.MainFormView.Views
 {

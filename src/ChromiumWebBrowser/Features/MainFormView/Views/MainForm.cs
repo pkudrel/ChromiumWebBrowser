@@ -22,7 +22,6 @@ namespace ChromiumWebBrowser.Features.MainFormView.Views
 
         public AdvanceChromiumWebBrowser Browser { get; set; }
 
-
         private void InitForm()
         {
             AutoScaleMode = AutoScaleMode.Font;

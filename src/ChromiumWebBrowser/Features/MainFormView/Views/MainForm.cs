@@ -15,6 +15,7 @@ namespace ChromiumWebBrowser.Features.MainFormView.Views
             InitializeComponent();
 
             // Browser = new AdvanceChromiumWebBrowser("www.google.com")
+            // Browser = new AdvanceChromiumWebBrowser("http://test.hornetpk.lan/")
 
             Browser = browserFn("http://test.hornetpk.lan/");
             splitContainer1.Panel2.Controls.Add(Browser);

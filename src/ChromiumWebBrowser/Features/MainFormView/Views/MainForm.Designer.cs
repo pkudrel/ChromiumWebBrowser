@@ -1,4 +1,4 @@
-﻿namespace ChromiumWebBrowser
+﻿namespace ChromiumWebBrowser.Features.MainFormView.Views
 {
     partial class MainForm
     {
@@ -131,14 +131,14 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // MainForm
+            // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1044, 568);
             this.Controls.Add(this.tabControl1);
             this.Name = "MainForm";
-            this.Text = "MainForm";
+            this.Text = "Form1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);

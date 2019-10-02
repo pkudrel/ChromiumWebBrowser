@@ -6,7 +6,7 @@ using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Threading;
 
-namespace ChromiumWebBrowser.Core.Misc.Bootstrap
+namespace ChromiumWebBrowser.Core.App.Bootstrap
 {
     /// <summary>
     /// Important: Add guid to AssemblyInfo.cs file, like:

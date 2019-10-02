@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace ChromiumWebBrowser.Core.Misc.Bootstrap
+namespace ChromiumWebBrowser.Core.App.Bootstrap
 {
     public static class Helpers
     {

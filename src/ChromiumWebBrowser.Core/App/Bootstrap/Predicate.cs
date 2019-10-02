@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ChromiumWebBrowser.Core.Misc.Bootstrap
+namespace ChromiumWebBrowser.Core.App.Bootstrap
 {
     public class Pred<T>
     {

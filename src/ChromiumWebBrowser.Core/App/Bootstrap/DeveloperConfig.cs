@@ -1,4 +1,4 @@
-﻿namespace ChromiumWebBrowser.Core.Misc.Bootstrap
+﻿namespace ChromiumWebBrowser.Core.App.Bootstrap
 {
     public class DeveloperConfig
     {

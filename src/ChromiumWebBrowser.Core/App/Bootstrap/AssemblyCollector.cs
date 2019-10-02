@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using NLog;
 
-namespace ChromiumWebBrowser.Core.Misc.Bootstrap
+namespace ChromiumWebBrowser.Core.App.Bootstrap
 {
     public enum AssemblyInProject
     {

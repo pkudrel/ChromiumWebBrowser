@@ -9,23 +9,17 @@ using ChromiumWebBrowser.Features.Chromium.Handlers;
 using ChromiumWebBrowser.Features.Chromium.Others;
 using ChromiumWebBrowser.Features.Chromium.ResourceHandlerTest;
 
-namespace ChromiumWebBrowser
+namespace ChromiumWebBrowser.Features.MainFormView.Views
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm(Func<string, AdvanceChromiumWebBrowser> browserFn)
         {
             InitializeComponent();
 
             // Browser = new AdvanceChromiumWebBrowser("www.google.com")
-            Browser = new AdvanceChromiumWebBrowser("http://test.hornetpk.lan/")
-            {
-                Dock = DockStyle.Fill
-            };
 
-            Browser.RequestHandler = new ExampleRequestHandler();
-            Browser.LifeSpanHandler = new LifeSpanHandler();
-            Browser.ResourceRequestHandlerFactory = new TestResourceRequestHandlerFactory();
+            Browser = browserFn("http://test.hornetpk.lan/");
             splitContainer1.Panel2.Controls.Add(Browser);
         }
 

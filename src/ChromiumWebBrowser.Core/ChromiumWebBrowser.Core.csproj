@@ -51,6 +51,21 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AngleSharp, Version=0.13.0.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
+      <HintPath>..\packages\AngleSharp.0.13.0\lib\net46\AngleSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="AngleSharp.Css, Version=0.13.0.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
+      <HintPath>..\packages\AngleSharp.Css.0.13.0\lib\net46\AngleSharp.Css.dll</HintPath>
+    </Reference>
+    <Reference Include="AngleSharp.Io, Version=0.13.1.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
+      <HintPath>..\packages\AngleSharp.Io.0.13.1\lib\netstandard2.0\AngleSharp.Io.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac, Version=4.9.4.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.9.4\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="MediatR, Version=7.0.0.0, Culture=neutral, PublicKeyToken=bb9a41a5e8aaa7e2, processorArchitecture=MSIL">
+      <HintPath>..\packages\MediatR.7.0.0\lib\net461\MediatR.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -61,9 +76,16 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Text.Encoding.CodePages, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encoding.CodePages.4.5.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -72,7 +94,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App\Config\AppModule.cs" />
+    <Compile Include="App\Config\MediatorModule.cs" />
     <Compile Include="AssemblyCore.cs" />
+    <Compile Include="Consts.cs" />
     <Compile Include="Common\Extensions\System.AppDomain.cs" />
     <Compile Include="Common\Extensions\System.Collections.Generic.IDictionary.cs" />
     <Compile Include="Common\Extensions\System.Collections.Generic.IEnumerable.cs" />
@@ -86,6 +111,7 @@
     <Compile Include="Common\Extensions\System.Type.cs" />
     <Compile Include="Common\Extensions\System.Uri.cs" />
     <Compile Include="Common\Hash\Other.cs" />
+    <Compile Include="Common\Helpers\WebHelpers.cs" />
     <Compile Include="Common\Io\EmbeddedData.cs" />
     <Compile Include="Common\Io\FileAsync.cs" />
     <Compile Include="Common\Io\Misc.cs" />
@@ -94,23 +120,40 @@
     <Compile Include="Features\Chromium\Models\FrameSimple.cs" />
     <Compile Include="Features\Chromium\Models\SelectorState.cs" />
     <Compile Include="Features\Chromium\Models\WaitForSelector.cs" />
-    <Compile Include="Misc\Bootstrap\AppEnvironment.cs" />
-    <Compile Include="Misc\Bootstrap\AppEnvironmentBuilder.cs" />
-    <Compile Include="Misc\Bootstrap\AppVersion.cs" />
-    <Compile Include="Misc\Bootstrap\AppVersionBuilder.cs" />
-    <Compile Include="Misc\Bootstrap\AssemblyCollector.cs" />
-    <Compile Include="Misc\Bootstrap\Attempt.cs" />
-    <Compile Include="Misc\Bootstrap\Boot.cs" />
-    <Compile Include="Misc\Bootstrap\DeveloperConfig.cs" />
-    <Compile Include="Misc\Bootstrap\ExclusiveWorker.cs" />
-    <Compile Include="Misc\Bootstrap\Helpers.cs" />
-    <Compile Include="Misc\Bootstrap\Predicate.cs" />
-    <Compile Include="Misc\Bootstrap\SingleGlobalInstance.cs" />
-    <Compile Include="Misc\Bootstrap\SingleInstanceHelper.cs" />
-    <Compile Include="Misc\Bootstrap\Stopwatch.cs" />
+    <Compile Include="App\Bootstrap\AppEnvironment.cs" />
+    <Compile Include="App\Bootstrap\AppEnvironmentBuilder.cs" />
+    <Compile Include="App\Bootstrap\AppVersion.cs" />
+    <Compile Include="App\Bootstrap\AppVersionBuilder.cs" />
+    <Compile Include="App\Bootstrap\AssemblyCollector.cs" />
+    <Compile Include="App\Bootstrap\Attempt.cs" />
+    <Compile Include="App\Bootstrap\Boot.cs" />
+    <Compile Include="App\Bootstrap\DeveloperConfig.cs" />
+    <Compile Include="App\Bootstrap\ExclusiveWorker.cs" />
+    <Compile Include="App\Bootstrap\Helpers.cs" />
+    <Compile Include="App\Bootstrap\Predicate.cs" />
+    <Compile Include="App\Bootstrap\SingleGlobalInstance.cs" />
+    <Compile Include="App\Bootstrap\SingleInstanceHelper.cs" />
+    <Compile Include="App\Bootstrap\Stopwatch.cs" />
+    <Compile Include="Features\HttpClients\Models\AdvanceBrowserSettings.cs" />
+    <Compile Include="Features\HttpClients\Models\DefaultHttpClientHandler.cs" />
+    <Compile Include="Features\HttpClients\Models\DefaultOptions.cs" />
+    <Compile Include="Features\HttpClients\Models\DefaultHeader.cs" />
+    <Compile Include="Features\HttpClients\Models\Cookie.cs" />
+    <Compile Include="Features\WebProxies\Models\ProxySettingsExtend.cs" />
+    <Compile Include="Features\WebProxies\Models\ProxySettings.cs" />
+    <Compile Include="Features\HttpClients\Services\DenebLabHttpClient.cs" />
+    <Compile Include="Features\HttpClients\Models\ClientOptionsBase.cs" />
+    <Compile Include="Features\HttpClients\Services\ProxyBrowser.cs" />
+    <Compile Include="Features\WebProxies\Models\WebProxyProvider.cs" />
+    <Compile Include="Features\WebProxies\Models\IWebProxyServiceBuilder.cs" />
+    <Compile Include="Features\WebProxies\Models\IWebProxyService.cs" />
+    <Compile Include="Features\WebProxies\NoneWebProxy\WebProxyNoneAutofacModule.cs" />
+    <Compile Include="Features\WebProxies\NoneWebProxy\NoneWebProxyServiceBuilder.cs" />
+    <Compile Include="Features\WebProxies\NoneWebProxy\NoneWebProxyService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

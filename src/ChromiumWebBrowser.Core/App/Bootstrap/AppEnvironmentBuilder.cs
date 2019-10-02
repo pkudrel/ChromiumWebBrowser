@@ -3,7 +3,7 @@ using System.IO;
 using System.Reflection;
 using Newtonsoft.Json;
 
-namespace ChromiumWebBrowser.Core.Misc.Bootstrap
+namespace ChromiumWebBrowser.Core.App.Bootstrap
 {
     public class AppEnvironmentBuilder
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using NLog;
 
-namespace ChromiumWebBrowser.Core.Misc.Bootstrap
+namespace ChromiumWebBrowser.Core.App.Bootstrap
 {
     public class Boot
     {

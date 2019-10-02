@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace ChromiumWebBrowser.Core.Misc.Bootstrap
+namespace ChromiumWebBrowser.Core.App.Bootstrap
 {
     /// <summary>
     /// Much like System.Diagnostics.Stopwatch, but the time elapsed can be directly manipulated.

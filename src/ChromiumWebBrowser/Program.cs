@@ -6,9 +6,11 @@ using Autofac;
 using CefSharp;
 using CefSharp.WinForms;
 using ChromiumWebBrowser.Core;
-using ChromiumWebBrowser.Core.Misc.Bootstrap;
+using ChromiumWebBrowser.Core.App.Bootstrap;
+using ChromiumWebBrowser.Core.Features.HttpClients;
 using ChromiumWebBrowser.Features.Downloader;
 using ChromiumWebBrowser.Features.Downloader.Models;
+using ChromiumWebBrowser.Features.MainFormView.Views;
 using ChromiumWebBrowser.Misc.Helpers;
 using NLog;
 
@@ -45,7 +47,9 @@ namespace ChromiumWebBrowser
                 {
                     using (var scope = container.BeginLifetimeScope())
                     {
-                        Application.Run(new Form1());
+                        var browser = scope.Resolve<IProxyBrowser>();
+                        var form = scope.Resolve<MainForm>();
+                        Application.Run(form);
                     }
                 }
             }

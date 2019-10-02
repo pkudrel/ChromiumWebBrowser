@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using ChromiumWebBrowser.Core.Misc.Bootstrap;
+using ChromiumWebBrowser.Core.App.Bootstrap;
 
 namespace ChromiumWebBrowser.Features.Downloader.Models
 {

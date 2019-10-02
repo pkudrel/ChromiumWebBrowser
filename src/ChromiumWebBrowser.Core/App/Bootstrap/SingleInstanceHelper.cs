@@ -1,7 +1,7 @@
 ﻿using System;
 using NLog;
 
-namespace ChromiumWebBrowser.Core.Misc.Bootstrap
+namespace ChromiumWebBrowser.Core.App.Bootstrap
 {
     public class SingleInstanceHelper
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Text;
-using ChromiumWebBrowser.Core.Misc.Bootstrap;
+using ChromiumWebBrowser.Core.App.Bootstrap;
 using NLog;
 using NLog.Config;
 using NLog.Targets;

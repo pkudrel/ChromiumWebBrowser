@@ -30,7 +30,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
@@ -102,11 +102,9 @@
     <Compile Include="Misc\Bootstrap\Attempt.cs" />
     <Compile Include="Misc\Bootstrap\Boot.cs" />
     <Compile Include="Misc\Bootstrap\DeveloperConfig.cs" />
-    <Compile Include="Misc\Bootstrap\DeveloperMode.cs" />
     <Compile Include="Misc\Bootstrap\ExclusiveWorker.cs" />
     <Compile Include="Misc\Bootstrap\Helpers.cs" />
     <Compile Include="Misc\Bootstrap\Predicate.cs" />
-    <Compile Include="Misc\Bootstrap\RegistryBase.cs" />
     <Compile Include="Misc\Bootstrap\SingleGlobalInstance.cs" />
     <Compile Include="Misc\Bootstrap\SingleInstanceHelper.cs" />
     <Compile Include="Misc\Bootstrap\Stopwatch.cs" />

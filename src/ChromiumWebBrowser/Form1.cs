@@ -23,10 +23,9 @@ namespace ChromiumWebBrowser
                 Dock = DockStyle.Fill
             };
 
-
             Browser.RequestHandler = new ExampleRequestHandler();
             Browser.LifeSpanHandler = new LifeSpanHandler();
-            Browser.ResourceRequestHandlerFactory  = new TestResourceRequestHandlerFactory();
+            Browser.ResourceRequestHandlerFactory = new TestResourceRequestHandlerFactory();
             splitContainer1.Panel2.Controls.Add(Browser);
         }
 
@@ -35,7 +34,9 @@ namespace ChromiumWebBrowser
 
         private void InitForm()
         {
-            splitContainer1.SplitterDistance = 60;
+            AutoScaleMode = AutoScaleMode.Font;
+            double factor = CreateGraphics().DpiX / 96f;
+            splitContainer1.SplitterDistance = (int) Math.Round(60 * factor);
             splitContainer1.FixedPanel = FixedPanel.Panel1;
             splitContainer1.IsSplitterFixed = true;
             Browser.AddressChanged += OnAddressChanged;

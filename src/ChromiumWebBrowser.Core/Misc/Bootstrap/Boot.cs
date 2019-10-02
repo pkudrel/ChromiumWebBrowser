@@ -10,10 +10,10 @@ namespace ChromiumWebBrowser.Core.Misc.Bootstrap
         private static readonly List<string> _buffer = new List<string>();
         private static readonly Logger _log = LogManager.GetCurrentClassLogger();
         private static readonly Boot _instance = new Boot();
+        private static readonly object _obj = new object();
         private AppEnvironment _appEnvironment;
-	   
 
-		static Boot()
+        static Boot()
         {
         }
 
@@ -25,19 +25,24 @@ namespace ChromiumWebBrowser.Core.Misc.Bootstrap
         public static Boot Instance => _instance;
 
 
-	    public void Start(Assembly mainAssembly)
+
+
+        public AppEnvironment Start(Assembly mainAssembly)
         {
-            _buffer.Add($"Begin boot; Main assembly: {mainAssembly.GetName().Name}");
-            AssemblyCollector.Instance.AddAssembly(mainAssembly, AssemblyInProject.Main);
-            _appEnvironment = AppEnvironmentBuilder.Instance.GetAppEnvironment(mainAssembly);
-            // Configure Nlog as soon as possible
-            DeveloperMode.NLog(_appEnvironment, _buffer);
-            FlushBuffer(_buffer);
-            _log.Debug("After NLog config");
+            if (_appEnvironment is null)
+                lock (_obj)
+                {
+                    if (_appEnvironment is null)
+                        _appEnvironment = AppEnvironmentBuilder.Instance.GetAppEnvironment(mainAssembly);
+                }
+
+            return _appEnvironment;
         }
+
 
         public AppEnvironment GetAppEnvironment()
         {
+
             if (_appEnvironment == null)
                 throw new NullReferenceException("Application has not been started correctly. Use Start method");
             return _appEnvironment;
@@ -58,7 +63,5 @@ namespace ChromiumWebBrowser.Core.Misc.Bootstrap
         {
             return AssemblyCollector.Instance.GetAssemblies();
         }
-
-	   
     }
 }

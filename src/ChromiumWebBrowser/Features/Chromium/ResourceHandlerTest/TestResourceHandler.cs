@@ -15,9 +15,9 @@ namespace ChromiumWebBrowser.Features.Chromium.ResourceHandlerTest
                 using (callback)
                 {
                     var httpWebRequest =
-                        (HttpWebRequest)WebRequest.Create(request.Url);
+                        (HttpWebRequest) WebRequest.Create(request.Url);
 
-                    var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                    var httpWebResponse = (HttpWebResponse) httpWebRequest.GetResponse();
 
                     // Get the stream associated with the response.
                     var receiveStream = httpWebResponse.GetResponseStream();
@@ -33,14 +33,14 @@ namespace ChromiumWebBrowser.Features.Chromium.ResourceHandlerTest
                     var dataAsUtf8String = Encoding.UTF8.GetString(stream2.ToArray());
                     stream2.Dispose();
                     var newData = dataAsUtf8String.Replace("test", "best");
-                    byte[] byteArray = Encoding.UTF8.GetBytes(newData);
-                    MemoryStream stream = new MemoryStream(byteArray);
+                    var byteArray = Encoding.UTF8.GetBytes(newData);
+                    var stream = new MemoryStream(byteArray);
                     //Populate the response values - No longer need to implement GetResponseHeaders (unless you need to perform a redirect)
 
                     stream.Position = 0;
                     ResponseLength = stream.Length;
                     MimeType = mime;
-                    StatusCode = (int)HttpStatusCode.OK;
+                    StatusCode = (int) HttpStatusCode.OK;
                     Stream = stream;
 
                     callback.Continue();

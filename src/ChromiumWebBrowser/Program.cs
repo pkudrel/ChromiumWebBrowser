@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Autofac;
 using CefSharp;
 using CefSharp.WinForms;
 using ChromiumWebBrowser.Core;
@@ -15,16 +14,20 @@ using NLog;
 
 namespace ChromiumWebBrowser
 {
-    static class Program
+    internal static class Program
     {
-
         private static readonly Logger _log = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main(string[] args)
+        {
+            MainAsync(args).GetAwaiter().GetResult();
+        }
+
+        public static async Task MainAsync(string[] args)
         {
 
             try
@@ -32,26 +35,34 @@ namespace ChromiumWebBrowser
                 var env = MainPart1();
                 var reg = MainPart2(env);
                 MainConfigureCef(env, reg);
+
+                var builder = new ContainerBuilder();
+                builder.RegisterAssemblyModules(Boot.Instance.GetAssemblies());
+                builder.RegisterInstance(env);
+                builder.RegisterInstance(reg);
+
+                using (var container = builder.Build())
+                {
+                    using (var scope = container.BeginLifetimeScope())
+                    {
+                        Application.Run(new Form1());
+                    }
+                }
             }
             catch (Exception e)
             {
                 _log.Error(e);
             }
-
-            
-            Application.Run(new Form1());
         }
-
-
 
         private static AppEnvironment MainPart1()
         {
             var asm = typeof(Program).Assembly;
-            var env = AppEnvironmentBuilder.Instance.GetAppEnvironment(asm);
+            var env = Boot.Instance.Start(asm);
             NlogFeature.AddNLog(env.LogDir, env.AppNameSlug, LogLevel.Debug, env.AppVersion);
             Boot.Instance.AddAssembly(asm, AssemblyInProject.Main);
             Boot.Instance.AddAssembly(typeof(AssemblyCore).Assembly, AssemblyInProject.Core);
-            
+
             return env;
         }
 
@@ -92,6 +103,5 @@ namespace ChromiumWebBrowser
             //Perform dependency check to make sure all relevant resources are in our output directory.
             Cef.Initialize(settings, false, browserProcessHandler: null);
         }
-
     }
 }

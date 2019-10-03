@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using Autofac;
+using ChromiumWebBrowser.Core.App.Behaviors;
 using ChromiumWebBrowser.Core.App.Bootstrap;
 using MediatR;
 using MediatR.Pipeline;
@@ -46,6 +47,31 @@ namespace ChromiumWebBrowser.Core.App.Config
                 return t => c.Resolve(t);
             });
 
+
+            // others Behaviors
+            builder.RegisterGeneric(typeof(LoggingBehavior<,>)).As(typeof(IPipelineBehavior<,>));
+
         }
+
+
+
+        // https://github.com/jbogard/MediatR/issues/241
+        // https://autofaccn.readthedocs.io/en/latest/advanced/interceptors.html
+        //
+        //builder.RegisterType<MediatorSnifferInterceptor>();
+        //builder
+        //    .RegisterType<Mediator>()
+        //.As<IMediator>()
+        //.InstancePerLifetimeScope()
+        //    .EnableClassInterceptors()
+        //    .InterceptedBy(typeof(MediatorSnifferInterceptor));
+        //public class MediatorSnifferInterceptor : IInterceptor
+        //{
+        //    public void Intercept(IInvocation invocation)
+        //    {
+        //        // your stuff here
+        //        invocation.Proceed();
+        //    }
+        //}
     }
 }

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
 using Autofac;
+using ChromiumWebBrowser.Core.Features.Projects.Services;
+using ChromiumWebBrowser.Core.Features.ResourceRequest.Default.Services;
 using ChromiumWebBrowser.Features.Chromium.Controls;
 using ChromiumWebBrowser.Features.Chromium.Handlers;
 using ChromiumWebBrowser.Features.Chromium.Others;
-using ChromiumWebBrowser.Features.Chromium.ResourceHandlerTest;
 
 namespace ChromiumWebBrowser.Features.Chromium.Config
 {
@@ -17,6 +18,8 @@ namespace ChromiumWebBrowser.Features.Chromium.Config
                 c =>
                 {
                     var cc = c.Resolve<IComponentContext>();
+                    var pm = cc.Resolve<IProjectManager>();
+                    var drrhf = cc.Resolve<DefaultResourceRequestHandlerFactory>();
 
                     return address =>
                     {
@@ -27,7 +30,7 @@ namespace ChromiumWebBrowser.Features.Chromium.Config
 
                         browser.RequestHandler = new ExampleRequestHandler();
                         browser.LifeSpanHandler = new LifeSpanHandler();
-                        browser.ResourceRequestHandlerFactory = new TestResourceRequestHandlerFactory();
+                        browser.ResourceRequestHandlerFactory = drrhf;
                         return browser;
                     };
                 });

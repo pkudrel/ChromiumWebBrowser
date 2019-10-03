@@ -7,11 +7,14 @@ using CefSharp;
 using CefSharp.WinForms;
 using ChromiumWebBrowser.Core;
 using ChromiumWebBrowser.Core.App.Bootstrap;
-using ChromiumWebBrowser.Core.Features.HttpClients;
+using ChromiumWebBrowser.Core.App.Models;
+using ChromiumWebBrowser.Core.App.ReqRes;
 using ChromiumWebBrowser.Features.Downloader;
 using ChromiumWebBrowser.Features.Downloader.Models;
 using ChromiumWebBrowser.Features.MainFormView.Views;
 using ChromiumWebBrowser.Misc.Helpers;
+using MediatR;
+using Newtonsoft.Json;
 using NLog;
 
 namespace ChromiumWebBrowser
@@ -31,7 +34,6 @@ namespace ChromiumWebBrowser
 
         public static async Task MainAsync(string[] args)
         {
-
             try
             {
                 var env = MainPart1();
@@ -39,6 +41,7 @@ namespace ChromiumWebBrowser
                 MainConfigureCef(env, reg);
 
                 var builder = new ContainerBuilder();
+                var asms = Boot.Instance.GetAssemblies();
                 builder.RegisterAssemblyModules(Boot.Instance.GetAssemblies());
                 builder.RegisterInstance(env);
                 builder.RegisterInstance(reg);
@@ -47,7 +50,11 @@ namespace ChromiumWebBrowser
                 {
                     using (var scope = container.BeginLifetimeScope())
                     {
-                        var browser = scope.Resolve<IProxyBrowser>();
+                        var mediator = scope.Resolve<IMediator>();
+                        _log.Debug($"Rise 'AppStartingEvent' event");
+                        await mediator.Publish(new AppStartingEvent());
+                        _log.Debug($"Rise 'AppStartedEvent' event");
+                        await mediator.Publish(new AppStartedEvent());
                         var form = scope.Resolve<MainForm>();
                         Application.Run(form);
                     }
@@ -70,8 +77,14 @@ namespace ChromiumWebBrowser
             return env;
         }
 
-        private static CefRegistry MainPart2(AppEnvironment env)
+        private static AppRegistry MainPart2(AppEnvironment env)
         {
+            // get config 
+            var pathToConfig = Path.Combine(env.ConfigDir, Consts.APP_CONFIG_FILE);
+            var json = File.ReadAllText(pathToConfig);
+            var config = JsonConvert.DeserializeObject<AppConfig>(json);
+
+
             var cnf = ConfigBuilder.Create();
             var reg = new CefRegistry(env, cnf);
 
@@ -82,10 +95,11 @@ namespace ChromiumWebBrowser
             Application.SetCompatibleTextRenderingDefault(false);
 
             ProgramDownloader.DownloadCefSharpEnvIfNeeded(reg);
-            return reg;
+            var registry = new AppRegistry(env, config);
+            return registry;
         }
 
-        private static void MainConfigureCef(AppEnvironment env, CefRegistry reg)
+        private static void MainConfigureCef(AppEnvironment env, AppRegistry reg)
         {
             //Monitor parent process exit and close subprocesses if parent process exits first
             //This will at some point in the future becomes the default

@@ -1,4 +1,6 @@
-﻿namespace ChromiumWebBrowser.Features.Projects.Models
+﻿using ChromiumWebBrowser.Core.Features.Projects.Models;
+
+namespace ChromiumWebBrowser.Features.Projects.Models
 {
     public class ProjectRegistry
     {

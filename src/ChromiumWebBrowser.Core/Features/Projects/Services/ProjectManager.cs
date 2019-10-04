@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using CefSharp;
 using ChromiumWebBrowser.Core.App.Models;
+using ChromiumWebBrowser.Core.Features.Projects.Models;
 using ChromiumWebBrowser.Features.Projects.Models;
 using Newtonsoft.Json;
 

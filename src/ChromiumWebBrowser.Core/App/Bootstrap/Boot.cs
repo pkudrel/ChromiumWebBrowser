@@ -44,7 +44,7 @@ namespace ChromiumWebBrowser.Core.App.Bootstrap
         {
 
             if (_appEnvironment == null)
-                throw new NullReferenceException("Application has not been started correctly. Use Start method");
+                throw new NullReferenceException("Application has not been started correctly. Use StartsWith method");
             return _appEnvironment;
         }
 

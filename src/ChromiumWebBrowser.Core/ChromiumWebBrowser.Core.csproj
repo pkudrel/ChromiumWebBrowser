@@ -162,6 +162,16 @@
     <Compile Include="Features\ResourceRequest\Default\Services\DefaultResourceHandler.cs" />
     <Compile Include="Features\ResourceRequest\Default\Services\DefaultResourceRequestHandler.cs" />
     <Compile Include="Features\ResourceRequest\Default\Services\DefaultResourceRequestHandlerFactory.cs" />
+    <Compile Include="Features\ResponseProcessor\Config\AutofacModule.cs" />
+    <Compile Include="Features\ResponseProcessor\Models\IProcessorDefinition.cs" />
+    <Compile Include="Features\ResponseProcessor\Models\MatchType.cs" />
+    <Compile Include="Features\ResponseProcessor\Models\Processor.cs" />
+    <Compile Include="Features\ResponseProcessor\Models\UrlRule.cs" />
+    <Compile Include="Features\ResponseProcessor\Models\UrlRuleService.cs" />
+    <Compile Include="Features\ResponseProcessor\Processors\Default\Config\AutofacModule.cs" />
+    <Compile Include="Features\ResponseProcessor\Processors\Default\Services\IResponseAction.cs" />
+    <Compile Include="Features\ResponseProcessor\Processors\Default\Services\MakeBrakesOnTagEnd.cs" />
+    <Compile Include="Features\ResponseProcessor\Services\ResponseProcessorManager.cs" />
     <Compile Include="Features\WebProxies\Config\AutofacModule.cs" />
     <Compile Include="Features\WebProxies\Models\ProxySettingsExtend.cs" />
     <Compile Include="Features\WebProxies\Models\ProxySettings.cs" />
@@ -180,7 +190,9 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Features\ResourceRequest\Models\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

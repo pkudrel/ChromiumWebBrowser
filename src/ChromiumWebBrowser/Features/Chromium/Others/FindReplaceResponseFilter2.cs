@@ -89,7 +89,7 @@ namespace ChromiumWebBrowser.Features.Chromium.Others
                         // Complete match of the find string. Write the replace string.
                         WriteString(replacementString, replacementString.Length, dataOut, ref dataOutWritten);
 
-                        // Start over looking for a match.
+                        // StartsWith over looking for a match.
                         findMatchOffset = 0;
                     }
 
@@ -102,7 +102,7 @@ namespace ChromiumWebBrowser.Features.Chromium.Others
                     // Write the portion of the find string that has matched so far.
                     WriteString(findString, findMatchOffset, dataOut, ref dataOutWritten);
 
-                    // Start over looking for a match.
+                    // StartsWith over looking for a match.
                     findMatchOffset = 0;
                 }
 

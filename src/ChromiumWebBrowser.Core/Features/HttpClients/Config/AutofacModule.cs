@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using ChromiumWebBrowser.Core.Features.HttpClients.Models;
 using ChromiumWebBrowser.Core.Features.WebProxies.Models;
 
 namespace ChromiumWebBrowser.Core.Features.HttpClients.Config
@@ -7,18 +8,33 @@ namespace ChromiumWebBrowser.Core.Features.HttpClients.Config
     {
         protected override void Load(ContainerBuilder builder)
         {
-            // WebProxyService
-            // IWebProxyService
+
             builder.Register(c =>
                 {
                     var cc = c.Resolve<IComponentContext>();
+                    var webProxyService = cc.Resolve<IWebProxyService>();
 
-                    var webProxy = WebProxyProvider.FromString("None");
-                    var webProxyServiceBuilder = cc.ResolveNamed<IWebProxyServiceBuilder>(webProxy.Name);
-                    var webProxyService = webProxyServiceBuilder.CreateWebProxyService();
+                    var handler = new DefaultHttpClientHandler
+                    {
+                        AllowAutoRedirect = true
+                    };
 
-                    return webProxyService;
-                }).As<IWebProxyService>()
+                    var settings = new AdvanceBrowserSettings
+                    {
+                        Headers = DefaultHeader.Value
+                    };
+
+                    var httpClient = new DenebLabHttpClient(
+                        handler,
+                        new DefaultOptions());
+
+                    var browser = new ProxyBrowser(
+                        httpClient,
+                        webProxyService,
+                        settings);
+                    return browser;
+                })
+                .As<IProxyBrowser>()
                 .SingleInstance();
         }
     }

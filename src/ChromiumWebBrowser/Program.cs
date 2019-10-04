@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -9,9 +10,11 @@ using ChromiumWebBrowser.Core;
 using ChromiumWebBrowser.Core.App.Bootstrap;
 using ChromiumWebBrowser.Core.App.Models;
 using ChromiumWebBrowser.Core.App.ReqRes;
+using ChromiumWebBrowser.Core.Features.Projects.Models;
 using ChromiumWebBrowser.Features.Downloader;
 using ChromiumWebBrowser.Features.Downloader.Models;
 using ChromiumWebBrowser.Features.MainFormView.Views;
+using ChromiumWebBrowser.Features.Projects.Models;
 using ChromiumWebBrowser.Misc.Helpers;
 using MediatR;
 using Newtonsoft.Json;
@@ -41,7 +44,6 @@ namespace ChromiumWebBrowser
                 MainConfigureCef(env, reg);
 
                 var builder = new ContainerBuilder();
-                var asms = Boot.Instance.GetAssemblies();
                 builder.RegisterAssemblyModules(Boot.Instance.GetAssemblies());
                 builder.RegisterInstance(env);
                 builder.RegisterInstance(reg);

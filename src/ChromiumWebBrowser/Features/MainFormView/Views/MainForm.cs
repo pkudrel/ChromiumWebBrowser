@@ -16,8 +16,8 @@ namespace ChromiumWebBrowser.Features.MainFormView.Views
 
             // Browser = new AdvanceChromiumWebBrowser("www.google.com")
             // Browser = new AdvanceChromiumWebBrowser("http://test.hornetpk.lan/")
-
-            Browser = browserFn("http://test.hornetpk.lan/");
+            // Browser = browserFn("http://test.hornetpk.lan/");
+            Browser = browserFn("https://katmoviehd.to/better-call-saul-s03e10-720p-web-dl-450mb/");
             splitContainer1.Panel2.Controls.Add(Browser);
         }
 
@@ -27,7 +27,7 @@ namespace ChromiumWebBrowser.Features.MainFormView.Views
         {
             AutoScaleMode = AutoScaleMode.Font;
             double factor = CreateGraphics().DpiX / 96f;
-            splitContainer1.SplitterDistance = (int) Math.Round(60 * factor);
+            splitContainer1.SplitterDistance = (int)Math.Round(60 * factor);
             splitContainer1.FixedPanel = FixedPanel.Panel1;
             splitContainer1.IsSplitterFixed = true;
             Browser.AddressChanged += OnAddressChanged;

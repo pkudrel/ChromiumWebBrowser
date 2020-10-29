@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -10,11 +9,9 @@ using ChromiumWebBrowser.Core;
 using ChromiumWebBrowser.Core.App.Bootstrap;
 using ChromiumWebBrowser.Core.App.Models;
 using ChromiumWebBrowser.Core.App.ReqRes;
-using ChromiumWebBrowser.Core.Features.Projects.Models;
 using ChromiumWebBrowser.Features.Downloader;
 using ChromiumWebBrowser.Features.Downloader.Models;
 using ChromiumWebBrowser.Features.MainFormView.Views;
-using ChromiumWebBrowser.Features.Projects.Models;
 using ChromiumWebBrowser.Misc.Helpers;
 using MediatR;
 using Newtonsoft.Json;
@@ -53,9 +50,9 @@ namespace ChromiumWebBrowser
                     using (var scope = container.BeginLifetimeScope())
                     {
                         var mediator = scope.Resolve<IMediator>();
-                        _log.Debug($"Rise 'AppStartingEvent' event");
+                        _log.Debug("Rise 'AppStartingEvent' event");
                         await mediator.Publish(new AppStartingEvent());
-                        _log.Debug($"Rise 'AppStartedEvent' event");
+                        _log.Debug("Rise 'AppStartedEvent' event");
                         await mediator.Publish(new AppStartedEvent());
                         var form = scope.Resolve<MainForm>();
                         Application.Run(form);
@@ -67,6 +64,7 @@ namespace ChromiumWebBrowser
                 _log.Error(e);
             }
         }
+
 
         private static AppEnvironment MainPart1()
         {

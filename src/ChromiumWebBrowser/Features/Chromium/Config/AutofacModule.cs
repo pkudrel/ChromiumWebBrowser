@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using Autofac;
 using ChromiumWebBrowser.Core.Features.Projects.Services;
+using ChromiumWebBrowser.Core.Features.Requests.Default.Services;
 using ChromiumWebBrowser.Core.Features.ResourceRequest.Default.Services;
 using ChromiumWebBrowser.Features.Chromium.Controls;
 using ChromiumWebBrowser.Features.Chromium.Handlers;
@@ -28,7 +29,7 @@ namespace ChromiumWebBrowser.Features.Chromium.Config
                             Dock = DockStyle.Fill
                         };
 
-                        browser.RequestHandler = new ExampleRequestHandler();
+                        browser.RequestHandler = new DefaultRequestHandler();
                         browser.LifeSpanHandler = new LifeSpanHandler();
                         browser.ResourceRequestHandlerFactory = drrhf;
                         return browser;

@@ -146,7 +146,6 @@ namespace AbcVersionTool
             return r;
         }
 
-        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             if (info == null) throw new ArgumentNullException("info");

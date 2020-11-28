@@ -89,9 +89,10 @@ namespace Helpers
             var process = Process.Start(startInfo);
             if (process == null)
                 return null;
-
-            var output = GetOutputCollection(process, logOutput, logLevelParser, outputFilter);
-            return new Process2(process, outputFilter, timeout, output);
+            string logFile = null;
+            var logStream = logFile != null ? new StreamWriter(File.Open(logFile, FileMode.Create)) : null;
+            BlockingCollection<Output> output = GetOutputCollection(process, logOutput, logLevelParser, outputFilter);
+            return new Process2(process, outputFilter, timeout, logStream, output);
         }
 
         private static BlockingCollection<Output> GetOutputCollection(
